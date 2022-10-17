@@ -1,9 +1,10 @@
+import collections
 import pathlib
 import sys
+import typing
 
 import nox
 import nox.command
-import collections
 
 nox.options.error_on_external_run = True
 nox.options.error_on_missing_interpreters = True
@@ -71,7 +72,7 @@ class NoxBase:
 				self._session.warn(f"Coverage result: {self._base_dir.joinpath(result_path).as_uri()}")
 				raise
 
-	def version_check(self, pypi_name: str | None = None, version_file: str | None = None):
+	def version_check(self, pypi_name: typing.Optional[str] = None, version_file: typing.Optional[str] = None):
 		"""Check if version is updated"""
 		self._install_requirements()
 
