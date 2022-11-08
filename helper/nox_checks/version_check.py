@@ -2,6 +2,7 @@ import argparse
 import json
 import pathlib
 import sys
+import typing
 
 import requests
 
@@ -9,7 +10,7 @@ import requests
 class VersionCheck:
 	"""Checker to asure that version was updated."""
 
-	def __init__(self, current_version: str, pypi_pkg_name: str, changelog_path: str | None = None) -> None:
+	def __init__(self, current_version: str, pypi_pkg_name: str, changelog_path: typing.Optional[str] = None) -> None:
 		"""Create checker.
 
 		:param current_version: Version of the current branch. E.g 1.1.0

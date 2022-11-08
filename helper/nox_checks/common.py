@@ -16,7 +16,7 @@ VENV_PREPARED = ""
 
 class NoxBase:
 
-	def __init__(self, session: nox.Session, project_name=None, changelog_path: pathlib.Path | None = None):
+	def __init__(self, session: nox.Session, project_name=None, changelog_path: typing.Optional[pathlib.Path] = None):
 		self._session = session
 		self._base_dir = pathlib.Path(__file__).parent.parent.parent.parent.resolve()
 		self._project_name = project_name if project_name else self._base_dir.name
