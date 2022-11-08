@@ -16,10 +16,11 @@ VENV_PREPARED = ""
 
 class NoxBase:
 
-	def __init__(self, session: nox.Session):
+	def __init__(self, session: nox.Session, project_name=None, changelog_path: pathlib.Path | None = None):
 		self._session = session
 		self._base_dir = pathlib.Path(__file__).parent.parent.parent.parent.resolve()
-		self._project_name = pathlib.Path(__file__).parent.parent.parent.parent.resolve().name
+		self._project_name = project_name if project_name else self._base_dir.name
+		self._changelog_path = changelog_path
 		print(self._project_name)
 		self._silent = False
 		self._python_executable: str = sys.executable if isinstance(session.virtualenv, nox.sessions.PassthroughEnv) else "python"
@@ -84,7 +85,7 @@ class NoxBase:
 			exec(file.read(), version_data)
 		branch_version = version_data.get("__version__", "0.0.0")
 
-		self._session.run("python", "helper/helper/nox_checks/version_check.py", "--branch_version", f"{branch_version}", "--pypi_name", f"{pypi_name}")
+		self._session.run("python", "helper/helper/nox_checks/version_check.py", "--branch_version", f"{branch_version}", "--pypi_name", f"{pypi_name}", "--changelog_path", f"{self._changelog_path}")
 
 
 def run_combined_sessions(session: nox.Session, sub_sessions: list[tuple[str, collections.abc.Callable[[], None]]]) -> None:

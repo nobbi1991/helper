@@ -1,5 +1,6 @@
 import argparse
 import json
+import pathlib
 import sys
 
 import requests
@@ -8,14 +9,16 @@ import requests
 class VersionCheck:
 	"""Checker to asure that version was updated."""
 
-	def __init__(self, current_version: str, pypi_pkg_name: str) -> None:
+	def __init__(self, current_version: str, pypi_pkg_name: str, changelog_path: str | None = None) -> None:
 		"""Create checker.
 
 		:param current_version: Version of the current branch. E.g 1.1.0
 		:param pypi_pkg_name: Name of the PyPi package
+		:param changelog_path: path to changelog file
 		"""
 		self.current_version = current_version
 		self.pypi_pkg_name = pypi_pkg_name
+		self.changelog_path = pathlib.Path(changelog_path) if changelog_path else None
 
 	def __get_pypi_version(self) -> str:
 		"""Get the newest version from PyPi.
@@ -47,17 +50,32 @@ class VersionCheck:
 
 		:return: 0 if branch version is higher than PyPi version. If not -1
 		"""
+		passed = True
+
 		pypi_version = self.__get_pypi_version()
 		branch_version = self.current_version
 
 		print(f"PyPi version: {pypi_version} | branch version: {branch_version}")
 
-		return 0 if self.__str_to_version(branch_version) > self.__str_to_version(pypi_version) else -1
+		if not self.__str_to_version(branch_version) > self.__str_to_version(pypi_version):
+			passed = False
+			print("Increase version of branch!")
+
+		if self.changelog_path:
+			with self.changelog_path.open("r") as changelog_file:
+				first_line = changelog_file.readline()
+
+			if branch_version not in first_line:
+				print(f"Current version '{branch_version}' must be mentioned in the first line of changelog.md!")
+				passed = False
+
+		return 0 if passed else -1
 
 
 if __name__ == "__main__":
 	PARSER = argparse.ArgumentParser()
 	PARSER.add_argument("-bv", "--branch_version")
 	PARSER.add_argument("-pn", "--pypi_name")
+	PARSER.add_argument("-cp", "--changelog_path")
 	ARGS = PARSER.parse_args()
-	sys.exit(VersionCheck(ARGS.branch_version, ARGS.pypi_name).check_version())
+	sys.exit(VersionCheck(ARGS.branch_version, ARGS.pypi_name, ARGS.changelog_path).check_version())
