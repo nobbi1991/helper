@@ -62,10 +62,10 @@ class NoxBase:
 		"""Run coverage."""
 		self._install_requirements()
 
-		self._install_requirements()
+		run_args = ["--rcfile=.coveragerc"]
 		html_args = ["--skip-covered", "--fail-under=100"]
 		with self._session.chdir("tests"):
-			self._session.run(self._python_executable, "-m", "coverage", "run", "run_unittest.py", silent=self._silent)
+			self._session.run(self._python_executable, "-m", "coverage", "run", *run_args, "run_unittest.py", silent=self._silent)
 			try:
 				self._session.run(self._python_executable, "-m", "coverage", "html", *html_args, silent=self._silent)
 			except nox.command.CommandFailed:
