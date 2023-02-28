@@ -21,7 +21,6 @@ class NoxBase:
 		self._base_dir = pathlib.Path(__file__).parent.parent.parent.parent.resolve()
 		self._project_name = project_name if project_name else self._base_dir.name
 		self._changelog_path = changelog_path
-		print(self._project_name)
 		self._silent = False
 		self._python_executable: str = sys.executable if isinstance(session.virtualenv, nox.sessions.PassthroughEnv) else "python"
 
@@ -49,13 +48,12 @@ class NoxBase:
 			dir_names = [self._project_name, "tests"]
 
 		if not rcfile:
-			rcfile = self._base_dir / "helper/helper/nox_checks/config/.pylintrc"
+			rcfile = pathlib.Path(__file__).parent / "config/.pylintrc"
 
 		self._install_requirements()
 		args = dir_names
 		args.append(f"--rcfile={rcfile}")
 		args.append(f"--jobs={jobs}")
-		print(args)
 		self._session.run(self._python_executable, "-m", "pylint", *args, silent=self._silent)
 
 	def coverage(self):
@@ -69,8 +67,7 @@ class NoxBase:
 			try:
 				self._session.run(self._python_executable, "-m", "coverage", "html", *html_args, silent=self._silent)
 			except nox.command.CommandFailed:
-				result_path = "tests/htmlcov/index.html"
-				self._session.warn(f"Coverage result: {self._base_dir.joinpath(result_path).as_uri()}")
+				self._session.warn(f"Coverage result: {(pathlib.Path.cwd() / 'htmlcov/index.html').as_uri()}")
 				raise
 
 	def version_check(self, pypi_name: typing.Optional[str] = None, version_file: typing.Optional[str] = None):

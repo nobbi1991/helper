@@ -8,7 +8,7 @@ def load_req() -> typing.List[str]:
 		return f.readlines()
 
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 setuptools.setup(
 	name="nose_helper",
@@ -19,5 +19,6 @@ setuptools.setup(
 	packages=setuptools.find_packages(exclude=["tests*"]),
 	install_requires=load_req(),
 	python_requires=">=3.10",
-	license="Apache License 2.0"
+	license="Apache License 2.0",
+	package_data = {"nose_helper.nox_checks.config": [".pylintrc"]}
 )
