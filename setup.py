@@ -8,7 +8,7 @@ def load_req() -> typing.List[str]:
 		return f.readlines()
 
 
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 
 setuptools.setup(
 	name="nose_helper",
