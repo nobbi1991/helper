@@ -1,3 +1,9 @@
+# Version 1.0.3 - 02.03.2023
+
+## Bugfix
+
+- Fixed bug at requirements install
+
 # Version 1.0.2 - 02.03.2023
 
 ## Bugfix

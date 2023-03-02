@@ -6,6 +6,8 @@ import typing
 import nox
 import nox.command
 
+import nose_helper.__version__
+
 nox.options.error_on_external_run = True
 nox.options.error_on_missing_interpreters = True
 nox.options.reuse_existing_virtualenvs = True
@@ -30,11 +32,7 @@ class NoxBase:
 		if not isinstance(self._session.virtualenv, nox.sessions.PassthroughEnv) and VENV_PREPARED != self._session.virtualenv.location:
 			self._session.install("-U", "pip", silent=self._silent)
 			self._session.install("-U", "wheel", silent=self._silent)
-			req_list = []
-			for req in ["requirements.txt", "helper/requirements.txt"]:
-				req_list.append("-r")
-				req_list.append(req)
-			self._session.install("-U", *req_list, silent=self._silent)
+			self._session.install("-U", "-r", "requirements.txt", f"nose_helper=={nose_helper.__version__.__version__}", silent=self._silent)
 
 		if not VENV_PREPARED:
 			if isinstance(self._session.virtualenv, nox.sessions.PassthroughEnv):
