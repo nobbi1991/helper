@@ -1,8 +1,8 @@
-# Version 1.0.0 - 27.02.2023
+# Version 1.0.2 - 02.03.2023
 
-## Features
+## Bugfix
 
-- First release as python package
+- Added python 3.9
 
 # Version 1.0.1 - 28.02.2023
 
@@ -10,3 +10,9 @@
 
 - Added ``.pylintrc`` file to package
 - Fixed path of htmlcov of coverage
+
+# Version 1.0.0 - 27.02.2023
+
+## Features
+
+- First release as python package
