@@ -1,3 +1,9 @@
+# Version 1.0.4 - 14.03.2023
+
+## Bugfix
+
+- Fixed paths of version_check
+
 # Version 1.0.3 - 02.03.2023
 
 ## Bugfix

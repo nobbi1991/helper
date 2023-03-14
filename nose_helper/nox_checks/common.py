@@ -17,8 +17,10 @@ VENV_PREPARED = ""
 
 
 class NoxBase:
+	"""Base class for NOX checks."""
 
 	def __init__(self, session: nox.Session, project_name=None, changelog_path: typing.Optional[pathlib.Path] = None):
+		"""init NOX checks."""
 		self._session = session
 		self._base_dir = pathlib.Path(__file__).parent.parent.parent.parent.resolve()
 		self._project_name = project_name if project_name else self._base_dir.name
@@ -40,8 +42,14 @@ class NoxBase:
 			else:
 				VENV_PREPARED = self._session.virtualenv.location
 
-	def pylint(self, dir_names: list[str] = None, rcfile: pathlib = None, jobs: int = 8) -> None:
+	def pylint(self, dir_names: list[str] = None, rcfile: pathlib = None, jobs: int = 4) -> None:
+		"""Run pylint.
 
+		:param dir_names: dir names, which should be checked
+		:param rcfile: config file for pylint
+		:param jobs: count of jobs
+		:return:
+		"""
 		if not dir_names:
 			dir_names = [self._project_name, "tests"]
 
@@ -54,7 +62,7 @@ class NoxBase:
 		args.append(f"--jobs={jobs}")
 		self._session.run(self._python_executable, "-m", "pylint", *args, silent=self._silent)
 
-	def coverage(self):
+	def coverage(self) -> None:
 		"""Run coverage."""
 		self._install_requirements()
 
@@ -69,18 +77,18 @@ class NoxBase:
 				raise
 
 	def version_check(self, pypi_name: typing.Optional[str] = None, version_file: typing.Optional[str] = None):
-		"""Check if version is updated"""
+		"""Check if version was updated"""
 		self._install_requirements()
 
 		pypi_name = pypi_name if pypi_name else self._project_name
-		version_file = version_file if version_file else self._base_dir / self._project_name / "__version__.py"
+		version_file = version_file if version_file else pathlib.Path.cwd() / self._project_name / "__version__.py"
 
 		version_data = {}
 		with open(version_file, "r", encoding="utf-8") as file:
 			exec(file.read(), version_data)
 		branch_version = version_data.get("__version__", "0.0.0")
 
-		self._session.run("python", "helper/helper/nox_checks/version_check.py", "--branch_version", f"{branch_version}", "--pypi_name", f"{pypi_name}", "--changelog_path", f"{self._changelog_path}")
+		self._session.run("python", f"{pathlib.Path(__file__).parent / 'version_check.py'}", "--branch_version", f"{branch_version}", "--pypi_name", f"{pypi_name}", "--changelog_path", f"{self._changelog_path}")
 
 
 def run_combined_sessions(session: nox.Session, sub_sessions: list[tuple[str, collections.abc.Callable[[], None]]]) -> None:
