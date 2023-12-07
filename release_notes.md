@@ -1,3 +1,9 @@
+# Version 1.2.0 - 07.12.2023
+
+## Features
+
+- Bumped versions
+
 # Version 1.1.0 - 26.09.2023
 
 ## Features
