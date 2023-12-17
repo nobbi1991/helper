@@ -1,0 +1,18 @@
+line-length = 250
+indent-width = 4
+
+# Assume Python 3.8
+target-version = "py311"
+
+[lint]
+preview = true
+
+select = ["E", "W", "D", "F", "I", "N", "PL", "RUF"]
+
+[lint.pylint]
+max-args = 10
+max-bool-expr = 5
+max-branches = 12
+max-public-methods = 20
+max-returns = 15
+max-statements = 75

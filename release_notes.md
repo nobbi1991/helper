@@ -1,3 +1,9 @@
+# Version 1.2.0 - dd.mm.2023
+
+## Features
+
+- Added ruff
+
 # Version 1.1.0 - 26.09.2023
 
 ## Features

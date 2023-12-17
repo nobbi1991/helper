@@ -7,6 +7,7 @@ import nox
 import nox.command
 
 import nose_helper.__version__
+import nose_helper.nox_checks.config
 
 nox.options.error_on_external_run = True
 nox.options.error_on_missing_interpreters = True
@@ -75,6 +76,11 @@ class NoxBase:
 			except nox.command.CommandFailed:
 				self._session.warn(f"Coverage result: {(pathlib.Path.cwd() / 'htmlcov/index.html').as_uri()}")
 				raise
+
+	def ruff(self):
+		"""Run ruff checks."""
+		self._install_requirements()
+		self._session.run(self._python_executable, "-m", "ruff", "check", ".", "--config", str(pathlib.Path(__file__).parent / "config/ruff_config.toml"), silent=self._silent)
 
 	def version_check(self, pypi_name: typing.Optional[str] = None, version_file: typing.Optional[str] = None):
 		"""Check if version was updated"""
