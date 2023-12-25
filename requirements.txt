@@ -1,4 +1,4 @@
-coverage~=7.3.2
+coverage~=7.3.4
 nox~=2023.4.22
 pylint~=3.0.2
 pyenchant~=3.2.2
