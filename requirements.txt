@@ -2,5 +2,5 @@ coverage~=7.3.2
 nox~=2023.4.22
 pylint~=3.0.2
 pyenchant~=3.2.2
-pytest~=7.4.3
+pytest~=8.1.0
 requests~=2.31.0
