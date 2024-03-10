@@ -1,3 +1,14 @@
+# Version 1.3.0 - 10.03.2024
+
+## Features
+
+- Bumped versions:
+    - coverage~=7.4.3
+    - nox~=2024.3.2
+    - pylint~=3.1.0
+    - pyenchant~=3.2.0
+    - pytest~=8.1.0
+
 # Version 1.2.0 - 07.12.2023
 
 ## Features
