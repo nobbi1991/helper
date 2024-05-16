@@ -1,3 +1,12 @@
+# Version 1.4.0 - dd.05.2024
+
+## Features
+- Added pylint-pydantic
+- Bumped versions:
+    - coverage~=7.5.1
+    - nox~=2024.4.15
+    - pyenchant~=3.2.2
+
 # Version 1.3.0 - 10.03.2024
 
 ## Features
