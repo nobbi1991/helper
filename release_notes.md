@@ -1,4 +1,4 @@
-# Version 1.4.0 - dd.05.2024
+# Version 1.4.0 - 13.06.2024
 
 ## Features
 - Added pylint-pydantic
