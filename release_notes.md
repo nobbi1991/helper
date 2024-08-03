@@ -1,6 +1,18 @@
+# Version 1.5.0 - 03.08.2024
+
+## Features
+
+- Bumped versions:
+    - coverage~=7.6.0
+    - pyenchant>=3.2.2
+    - pylint~=3.2.6
+    - pytest~=8.3.2
+    - requests>=2.31.0
+
 # Version 1.4.0 - 13.06.2024
 
 ## Features
+
 - Added pylint-pydantic
 - Bumped versions:
     - coverage~=7.5.1
