@@ -1,7 +1,7 @@
 coverage~=7.6.0
 nox~=2024.4.15
-pyenchant>=3.2.2
+pyenchant>=3.2.2,<4.0.0
 pylint-pydantic~=0.3.2
 pylint~=3.2.6
 pytest~=8.3.2
-requests>=2.31.0
+requests>=2.31.0,<3.0.0

@@ -4,10 +4,10 @@
 
 - Bumped versions:
     - coverage~=7.6.0
-    - pyenchant>=3.2.2
+    - pyenchant>=3.2.2,<4.0.0
     - pylint~=3.2.6
     - pytest~=8.3.2
-    - requests>=2.31.0
+    - requests>=2.31.0,<3.0.0
 
 # Version 1.4.0 - 13.06.2024
 
