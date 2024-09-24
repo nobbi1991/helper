@@ -1,3 +1,9 @@
+# Version 1.6.0 - 24.09.2024
+
+## Features
+
+- set the minimum pylint version to python 3.11
+
 # Version 1.5.0 - 03.08.2024
 
 ## Features
