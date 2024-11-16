@@ -1,3 +1,13 @@
+# Version 1.7.0 - 16.11.2024
+
+## Features
+
+- Bumped versions:
+    - coverage~=7.6.7
+    - nox~=2024.10.9
+    - pylint~=3.3.1
+    - pytest~=8.3.3
+
 # Version 1.6.0 - 24.09.2024
 
 ## Features
