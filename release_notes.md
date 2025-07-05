@@ -1,3 +1,14 @@
+# Version 1.8.0 - 05.07.2025
+
+## Features
+
+- Bumped versions:
+    - coverage~=7.9.2
+    - nox~=2025.5.1
+    - pylint-pydantic~=0.3.5
+    - pylint~=3.3.7
+    - pytest~=8.4.1
+
 # Version 1.7.0 - 16.11.2024
 
 ## Features
